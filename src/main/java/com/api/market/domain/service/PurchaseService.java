@@ -1,5 +1,6 @@
 package com.api.market.domain.service;
 
+import com.api.market.domain.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
