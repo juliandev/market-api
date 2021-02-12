@@ -2,6 +2,8 @@ package com.api.market.persistence;
 
 import com.api.market.domain.Product;
 import com.api.market.domain.repository.ProductRepository;
+import com.api.market.persistence.crud.ProductoCrudRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,9 @@ import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
+
+	@Autowired
+	private ProductoCrudRepository productoCrudRepository;
 
 	@Override
 	public List<Product> getAllProducts() {
