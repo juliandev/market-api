@@ -23,15 +23,19 @@ public class ProductService {
 	}
 
 	public Optional<List<Product>> getByCategory(int categoryId) {
-		return null;
+		return productRepository.getByCategory(categoryId);
 	}
 
 	public Product save(Product product) {
-		return null;
+		return productRepository.save(product);
 	}
 
 	public Boolean delete(int productId) {
-		return null;
+		return getProduct(productId)
+			.map(product -> {
+				productRepository.delete(productId);
+				return true;
+			}).orElse(false);
 	}
 
 }

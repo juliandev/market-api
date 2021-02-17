@@ -1,6 +1,7 @@
 package com.api.market.web.controller;
 
 import com.api.market.domain.Purchase;
+import com.api.market.domain.service.PurchaseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,11 +19,14 @@ import java.util.List;
 @Api(value = "Purchases", description = "REST API for manage Purchases", tags = { "Purchases" })
 public class PurchaseController {
 
+	@Autowired
+	private PurchaseService purchaseService;
+
         @GetMapping("/purchases")
 	@ApiOperation("Get all purchases")
 	@ApiResponse(code = 200, message = "OK")
         public ResponseEntity<List<Purchase>> getAllPurchases() {
-                return null;
+                return new ResponseEntity<>(purchaseService.getAllPurchases(), HttpStatus.OK);
         }
 
         @GetMapping("/purchases/customers/{customer-id}")
@@ -32,14 +36,16 @@ public class PurchaseController {
 		@ApiResponse(code = 404, message = "Purchases not found"),
 	})
         public ResponseEntity<List<Purchase>> getPurchasesByClient(@PathVariable("client-id") String clientId) {
-                return null;
+                return purchaseService.getPurchasesByClient(clientId)
+			.map(purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
+			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
 
         @PostMapping("/purchases")
 	@ApiOperation("Create purchase")
 	@ApiResponse(code = 201, message = "CREATED")
         public ResponseEntity<Purchase> save(@RequestBody Purchase purchase) {
-                return null;
+                return new ResponseEntity<>(purchaseService.save(purchase), HttpStatus.CREATED);
         }
 
 }
