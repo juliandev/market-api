@@ -1,4 +1,4 @@
-package con.api.market.persistence.mapper;
+package com.api.market.persistence.mapper;
 
 import com.api.market.domain.Category;
 import com.api.market.domain.Product;
