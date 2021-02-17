@@ -11,7 +11,15 @@ public class CategoryMapperImpl implements CategoryMapper {
 
 	@Override
 	public Category toCategory(Categoria categoria) {
-		return null;
+		Category category = null;
+		if (categoria != null) {
+			category = new Category();
+			category.setCategoryId(categoria.getIdCategoria());
+			category.setCategory(categoria.getDescripcion());
+			category.setActive(categoria.getEstado());
+
+		}
+		return category;
 	}
 
 	@Override

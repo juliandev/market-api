@@ -11,12 +11,26 @@ public class PurchaseItemMapperImpl implements PurchaseItemMapper {
 
 	@Override
 	public PurchaseItem toPurchaseItem(ComprasProducto producto) {
-		return null;
+		PurchaseItem purchaseItem = null;
+		if (producto != null) {
+			purchaseItem = new PurchaseItem();
+			purchaseItem.setProductId(producto.getId().getIdProducto());
+			purchaseItem.setQuantity(producto.getCantidad());
+			purchaseItem.setActive(producto.getEstado());
+		}
+		return purchaseItem;
 	}
 
 	@Override
 	public ComprasProducto toComprasProducto(PurchaseItem item) {
-		return null;
+		ComprasProducto comprasProducto = null;
+		if (item != null) {
+			comprasProducto = new ComprasProducto();
+			comprasProducto.setCantidad(item.getQuantity());
+			comprasProducto.setTotal(item.getTotal());
+			comprasProducto.setEstado(item.isActive());
+		}
+		return comprasProducto;
 	}
 
 }
