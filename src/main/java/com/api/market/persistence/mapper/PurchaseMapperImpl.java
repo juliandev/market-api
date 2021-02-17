@@ -71,7 +71,7 @@ public class PurchaseMapperImpl implements PurchaseMapper {
 					}
 					purchase.setItems(items);
 				}
-
+				purchases.add(purchase);
                         }
 		}
 		return purchases;
