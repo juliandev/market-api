@@ -101,7 +101,6 @@ public class PurchaseMapperImpl implements PurchaseMapper {
 				productos.add(comprasProducto);
 			}
 			compra.setProductos(productos);
-			
 		}
 		return compra;
 	}
