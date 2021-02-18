@@ -6,6 +6,7 @@ import com.api.market.domain.Purchase;
 import com.api.market.domain.PurchaseItem;
 import com.api.market.persistence.entity.Compra;
 import com.api.market.persistence.entity.ComprasProducto;
+import com.api.market.persistence.entity.ComprasProductoPK;
 import com.api.market.persistence.entity.Producto;
 import com.api.market.persistence.mapper.PurchaseMapper;
 
@@ -82,21 +83,25 @@ public class PurchaseMapperImpl implements PurchaseMapper {
 		Compra compra = null;
 		if (purchase != null) {
 			compra = new Compra();
-			compra.setIdCompra(purchase.getPurchaseId());
 			compra.setIdCliente(purchase.getClientId());
 			compra.setFecha(purchase.getDate());
 			compra.setMedioPago(purchase.getPaymentMethod());
 			compra.setComentario(purchase.getComment());
 			compra.setEstado(purchase.getState());
+			
 			List<ComprasProducto> productos = new ArrayList<>();
 			for(PurchaseItem item : purchase.getItems()) {
 				ComprasProducto comprasProducto = new ComprasProducto();
+				ComprasProductoPK comprasProductoPK = new ComprasProductoPK();
+				comprasProductoPK.setIdProducto(item.getProductId());
+				comprasProducto.setId(comprasProductoPK);
 				comprasProducto.setCantidad(item.getQuantity());
 				comprasProducto.setTotal(item.getTotal());
 				comprasProducto.setEstado(item.isActive());
 				productos.add(comprasProducto);
 			}
 			compra.setProductos(productos);
+			
 		}
 		return compra;
 	}

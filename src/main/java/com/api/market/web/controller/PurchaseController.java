@@ -35,7 +35,7 @@ public class PurchaseController {
 		@ApiResponse(code = 200, message = "OK"),
 		@ApiResponse(code = 404, message = "Purchases not found"),
 	})
-        public ResponseEntity<List<Purchase>> getPurchasesByClient(@PathVariable("client-id") String clientId) {
+        public ResponseEntity<List<Purchase>> getPurchasesByClient(@PathVariable("customer-id") String clientId) {
                 return purchaseService.getPurchasesByClient(clientId)
 			.map(purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
 			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
