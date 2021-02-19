@@ -25,14 +25,14 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/products")
-	@ApiOperation(value = "Get all supermarket products", authorizations = { @Authorization(value="JWT") })
+	@ApiOperation(value = "Get all supermarket products", authorizations = { @Authorization(value = "JWT") })
 	@ApiResponse(code = 200, message = "OK")
 	public ResponseEntity<List<Product>> getAllProducts() {
 		return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/products/{product-id}")
-	@ApiOperation("Search a product with an ID")
+	@ApiOperation(value = "Search a product with an ID",  authorizations = { @Authorization(value = "JWT") })
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK"),
 		@ApiResponse(code = 404, message = "Product not found"),
@@ -45,7 +45,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/category/{category-id}")
-	@ApiOperation("Get all products according to a category")
+	@ApiOperation(value = "Get all products according to a category",  authorizations = { @Authorization(value = "JWT") })
 	@ApiResponses({
                 @ApiResponse(code = 200, message = "OK"),
                 @ApiResponse(code = 404, message = "Products not found"),
@@ -57,14 +57,14 @@ public class ProductController {
 	}
 
 	@PostMapping("/products")
-	@ApiOperation("Create product")
+	@ApiOperation(value = "Create product", authorizations = { @Authorization(value = "JWT") })
         @ApiResponse(code = 201, message = "CREATED")
 	public ResponseEntity<Product> save(@RequestBody Product product) {
 		return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/products/{product-id}")
-	@ApiOperation("Delete product with an ID")
+	@ApiOperation(value = "Delete product with an ID", authorizations = { @Authorization(value = "JWT") })
         @ApiResponses({
                 @ApiResponse(code = 200, message = "OK"),
                 @ApiResponse(code = 404, message = "Product not found"),
